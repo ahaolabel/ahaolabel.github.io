@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Qt6 C++开发指南读书笔记-元对象系统概述 | ahao的休憩小屋</title><meta name="author" content="ahao"><meta name="copyright" content="ahao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Qt的元对象系统的功能建立基础 QObject类是所有使用元对象系统的类的基类 必须在一个类的开头部分插入宏Q_OBJECT，这样这个类才可以使用元对象系统的特性 MOC为每个QObject的子类提供必要的代码来实现元对象系统的特性  构建项目时，MOC会读取C++源文件，当他发现类的定义里有Q_Object宏时，他就会为这个类生成另一个包含元对象支持代码的C++源文件，这个生成的源文件连同类的实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt6 C++开发指南读书笔记-元对象系统概述">
+<meta property="og:url" content="http://ahaolabel.github.io/2024/08/30/Qt6%20C++%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="ahao的休憩小屋">
+<meta property="og:description" content="Qt的元对象系统的功能建立基础 QObject类是所有使用元对象系统的类的基类 必须在一个类的开头部分插入宏Q_OBJECT，这样这个类才可以使用元对象系统的特性 MOC为每个QObject的子类提供必要的代码来实现元对象系统的特性  构建项目时，MOC会读取C++源文件，当他发现类的定义里有Q_Object宏时，他就会为这个类生成另一个包含元对象支持代码的C++源文件，这个生成的源文件连同类的实">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ahaolabel.github.io/img/%E5%A4%B4%E5%83%8F2.png">
+<meta property="article:published_time" content="2024-08-30T04:30:02.000Z">
+<meta property="article:modified_time" content="2024-10-13T04:19:54.843Z">
+<meta property="article:author" content="ahao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ahaolabel.github.io/img/%E5%A4%B4%E5%83%8F2.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://ahaolabel.github.io/2024/08/30/Qt6%20C++%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ahao","link":"链接: ","source":"来源: ahao的休憩小屋","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Qt6 C++开发指南读书笔记-元对象系统概述',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-13 12:19:54'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/%E5%A4%B4%E5%83%8F2.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E8%83%8C%E6%99%AF2.png')"><nav id="nav"><span id="blog-info"><a href="/" title="ahao的休憩小屋"><span class="site-name">ahao的休憩小屋</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Qt6 C++开发指南读书笔记-元对象系统概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-30T04:30:02.000Z" title="发表于 2024-08-30 12:30:02">2024-08-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-13T04:19:54.843Z" title="更新于 2024-10-13 12:19:54">2024-10-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Qt6-C-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">Qt6 C++开发指南</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Qt6 C++开发指南读书笔记-元对象系统概述"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Qt的元对象系统的功能建立基础"><a href="#Qt的元对象系统的功能建立基础" class="headerlink" title="Qt的元对象系统的功能建立基础"></a>Qt的元对象系统的功能建立基础</h1><ol>
+<li>QObject类是所有使用元对象系统的类的基类</li>
+<li>必须在一个类的开头部分插入宏Q_OBJECT，这样这个类才可以使用元对象系统的特性</li>
+<li>MOC为每个QObject的子类提供必要的代码来实现元对象系统的特性</li>
+</ol>
+<p>构建项目时，MOC会读取C++源文件，当他发现类的定义里有Q_Object宏时，他就会为这个类生成另一个包含元对象支持代码的C++源文件，这个生成的源文件连同类的实现文件一起被标准C++编译器编译和连接。</p>
+<h1 id="QObject类"><a href="#QObject类" class="headerlink" title="QObject类"></a>QObject类</h1><h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>QObject类是所有使用元对象系统的类的基类，也就是说，如果一个类的父类或上层父类时QObject，它就可以使用信号与槽、属性等特性。</p>
+<h2 id="QObject类与元对象系统特性相关的函数"><a href="#QObject类与元对象系统特性相关的函数" class="headerlink" title="QObject类与元对象系统特性相关的函数"></a>QObject类与元对象系统特性相关的函数</h2><h3 id="元对象"><a href="#元对象" class="headerlink" title="元对象"></a>元对象</h3><p>QMetaObject *metaObject()                   返回这个类的元对象<br>QMetaObject staticMetaObject                这是类的静态变量，不是函数，存储了类的元对象</p>
+<h3 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h3><p>bool inherits()                             判断这个对象是不是某个类的子类的实例</p>
+<h3 id="动态翻译"><a href="#动态翻译" class="headerlink" title="动态翻译"></a>动态翻译</h3><p>QString tr()                                类的静态函数，返回一个字符串的翻译版本</p>
+<h3 id="对象树"><a href="#对象树" class="headerlink" title="对象树"></a>对象树</h3><p>QObjectList &amp;children()                     返回子对象列表<br>QObject *parent()                           返回父对象指针<br>void setParent()                            设置父对象<br>T findChild()                               按照对象名称，查找可被转化为类型T的子对象<br>QList<T> findChildren()                     返回符合名称和类型条件的子对象列表</p>
+<h3 id="信号槽"><a href="#信号槽" class="headerlink" title="信号槽"></a>信号槽</h3><p>QMetaObject::Connection connect()           设置信号与槽关联<br>bool disconnect()                           解除信号与槽的关联<br>bool blockSignals()                         设置是否阻止对象发射任何信号<br>bool signalsBlocked()                       若返回true，表示对象被阻止发射信号</p>
+<h3 id="属性系统"><a href="#属性系统" class="headerlink" title="属性系统"></a>属性系统</h3><p>QList<QByteArray> dynamicPropertyNames()    返回所有动态属性名称<br>bool setProperty()                          设置属性值，或添加动态属性<br>QVariant property()                         返回属性值</p>
+<h2 id="元对象特性的实现"><a href="#元对象特性的实现" class="headerlink" title="元对象特性的实现"></a>元对象特性的实现</h2><h3 id="元对象-meta-object"><a href="#元对象-meta-object" class="headerlink" title="元对象(meta object)"></a>元对象(meta object)</h3><p>每个QObject及其子类的实力都有一个元对象，这个元对象是自动创建的。静态变量staticQObject就是这个元对象，函数metaObject返回这个元对象指针，所以获取一个对象的元对象有两种方式，示意代码如下：<br>QPushButton *btn &#x3D; new QPushButton();<br>const QMetaObject *metaPtr &#x3D; btn-&gt;metaObject();         &#x2F;&#x2F;获取元对象指针<br>const QMetaObject metaobj &#x3D; btn-&gt;staticMetaObject;      &#x2F;&#x2F;获取元对象</p>
+<h3 id="类型信息-1"><a href="#类型信息-1" class="headerlink" title="类型信息"></a>类型信息</h3><p>QObject的inherits()函数可以判断对象是不是从某个类继承的类的实例</p>
+<h3 id="动态翻译-1"><a href="#动态翻译-1" class="headerlink" title="动态翻译"></a>动态翻译</h3><p>函数tr() 用于返回一个字符串的翻译版本，在设计多语言界面的应用需要用到tr()函数</p>
+<h3 id="对象树-object-tree"><a href="#对象树-object-tree" class="headerlink" title="对象树(object tree)"></a>对象树(object tree)</h3><p>对象树(object tree) 指的是表示对象间从属关系的树状结构。例如在一个窗口上，组件都有父容器，窗口时界面上所有组件的顶层容器。<br>Object类的parent()函数返回其父对象，children()函数返回其子对象，findChildren()函数可以返回某些子对象或所有子对象。<br>窗口和窗口上的所有组件就构成了对象树，窗口可以访问任意一个界面组件。<br>对象树中的某个对象被删除时，它的子对象会被自动删除，所以，一个窗口被删除时，它上面的所有界面组件也会被自动删除。</p>
+<h2 id="信号与槽"><a href="#信号与槽" class="headerlink" title="信号与槽"></a>信号与槽</h2><p>通过在一个类的定义中插入宏Q_OBEJECT，我们就可以使用Qt扩展的C++语言特性编程，例如在一个类中定义属性、类属性、信号和槽函数</p>
+<h2 id="属性系统-1"><a href="#属性系统-1" class="headerlink" title="属性系统"></a>属性系统</h2><p>在类的定义代码中可以使用宏Q_PROPERTY定义属性，QObject的setProperty()函数会设置属性的值或定义动态属性;propertry()函数会返回属性的值</p>
+<h1 id="QMetaObject类"><a href="#QMetaObject类" class="headerlink" title="QMetaObject类"></a>QMetaObject类</h1><p>每个QObject及其子类的实例都有一个自动创建的元对象，元对象是MetaObject类型的实例。<br>元对象存储了类的实例所属类的各种元数据，包括信息元数据、方法元数据、属性元数据等，所以元对象实质上是对类的描述</p>
+<h2 id="QMetaObject类的主要接口函数"><a href="#QMetaObject类的主要接口函数" class="headerlink" title="QMetaObject类的主要接口函数"></a>QMetaObject类的主要接口函数</h2><h3 id="类的信息"><a href="#类的信息" class="headerlink" title="类的信息"></a>类的信息</h3><p>char <em>className()                           返回这个类的类名称<br>QMetaType metaType()                        返回这个元对象的元类型<br>MetaObject <em>superClass()                    返回这个类的上层父类的元对象<br>bool inherits(QMetaObject <em>metaObject)      返回true表示这个类继承自metaObject描述得类，否则返回false<br>QObject <em>newInstance(</em></em></em></em>)                  创建这个类的一个实例，可以给构造函数传递最多10个参数</p>
+<h3 id="类信息元数据"><a href="#类信息元数据" class="headerlink" title="类信息元数据"></a>类信息元数据</h3><p>QMetaClassInfo classInfo(int index)         返回序号为index的一条类信息的元数据，类信息是在类中用宏Q_CLASSINFO定义的一条信息<br>int indexOfClassInfo(char* name)            返回名称为name的类信息的序号，序号可用于classInfo函数<br>int classInfoCount()                        返回这个类的类信息条数<br>int classInfoOffset()                       返回这个类的第一条类信息的序号</p>
+<h3 id="构造函数元数据"><a href="#构造函数元数据" class="headerlink" title="构造函数元数据"></a>构造函数元数据</h3><p>int constructorCount()                      返回这个类的构造函数的个数<br>QMetaMethod constructor(int index)          返回这个类的序号为index的构造函数的元数据<br>int indexOfConstructor(char *constructor)   返回一个构造函数的序号，constructor包括正则化之后的函数名和参数名</p>
+<h3 id="方法元数据"><a href="#方法元数据" class="headerlink" title="方法元数据"></a>方法元数据</h3><p>QMetaMethod method(int index)               返回序号为index的方法的元数据<br>int methodCount()                           返回这个类的方法的个数，包括基类中定义的方法，方法包括一般的成员函数，还包括信号和槽<br>int methodOffset()                          返回这个类的第一个方法的序号<br>int indexOfMethod(char* method)             返回名称为method的方法的序号</p>
+<h3 id="枚举类型元数据"><a href="#枚举类型元数据" class="headerlink" title="枚举类型元数据"></a>枚举类型元数据</h3><p>QMetaEnum enumerator(int index)             返回序号为index的枚举类型的元数据<br>int enumeratorCount()                       返回这个类的枚举类型个数<br>int enumeratorOffset()                      返回这个类的第一个枚举类型的序号<br>int indexOfEnumerator(char *name)           返回名称为name的枚举类型的序号  *   </p>
+<h3 id="属性元数据"><a href="#属性元数据" class="headerlink" title="属性元数据"></a>属性元数据</h3><p>QMetaProperty property(int index)           返回序号为index的属性的元数据<br>int propertyCount()                         返回这个类的属性的个数<br>int propertyOffset()                        返回这个类的第一个属性的序号<br>int indexOfProperty()                       返回名称为name的属性的序号</p>
+<h3 id="信号与槽-1"><a href="#信号与槽-1" class="headerlink" title="信号与槽"></a>信号与槽</h3><p>int indexOfSignal(char *signal)             返回名称为singnal的信号的序号<br>int indexOfSlot(char *slot)                 返回名称为slot的槽函数的序号</p>
+<h3 id="静态函数"><a href="#静态函数" class="headerlink" title="静态函数"></a>静态函数</h3><p>bool checkConnectArgs(****)                 检查信号与槽函数的参数是否兼容<br>void connectSlotsByName(QObject <em>object)    迭代搜索object的所有子对象，将匹配的信号与槽连接起来<br>bool invokeMethod(</em>***)                     运行QObject对象的某个方法，包括信号、槽或成员函数<br>QByteArray normalizedSignature(char *method)将方法method的名字和参数字符串正则化，去除多余空格。函数返回结果可用于checkConnetArgs(), indexOfConstructor()等函数</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过QMetaObject类的这些函数，我们可以在运行时获取一个QObject对象的类信息和各种元数据。例如，函数className()可以返回类的名称，函数superClass()可以返回其父类的元对象，函数newInstance()可以创建元对象所描述类的一个新的实例。<br>类的元数据又可分为多种类型，且有专门的类来描述。例如，函数property返回属性的元数据，属性元数据用QMetaProperty类描述，它的接口函数描述了属性的各种特性，如函数name()返回属性名称，函数type()返回属性数据类型。</p>
+<h1 id="元对象系统的一些特性补充扩展"><a href="#元对象系统的一些特性补充扩展" class="headerlink" title="元对象系统的一些特性补充扩展"></a>元对象系统的一些特性补充扩展</h1><h2 id="运行时类型信息"><a href="#运行时类型信息" class="headerlink" title="运行时类型信息"></a>运行时类型信息</h2><p>通过使用QObject和QMetaObject提供的以下一些接口函数，我们可以在运行时获得一个对象的类名称以及其父类的名称，判断其是否从某个类继承而来。要实现这些功能，我们并不需要C++编译器的运行时类型信息(run-time type information, RTTI) 支持。<br>(1) 函数QMetaObject::className()。这个函数可在运行时返回类名称的字符串。<br>(2) 函数QObject::inherits()。这个函数可以判断一个对象是不是继承自某个类的实例，顶层的父类是QObject。<br>(3) 函数QMetaObject::superClass()。这个函数返回该元对象所描类的父类的元对象，通过父类的元对象可以获取父类的一些元数据。<br>(4) 函数qobject_cast()。这个函数是头文件<QObject>中定义的一个非成员函数，对于QObject及其子类的对象，可以使用函数qobject_cast()进行动态类型转换。如果自定义的类要支持函数qobject_cast()，那么自定义的类需要直接或间接继承自QObject，且在类定义中插入宏Q_OBJECT。<br>注: 标准C++语言中有类似的强制类型转换函数dynamic_cast()，使用qobject_cast()的好处是不需要C++编译器开启RTTI支持。</p>
+<h2 id="属性系统-2"><a href="#属性系统-2" class="headerlink" title="属性系统"></a>属性系统</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ahaolabel.github.io">ahao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ahaolabel.github.io/2024/08/30/Qt6%20C++%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">http://ahaolabel.github.io/2024/08/30/Qt6 C++开发指南读书笔记-元对象系统概述/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ahaolabel.github.io" target="_blank">ahao的休憩小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/%E5%A4%B4%E5%83%8F2.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/08/30/%E9%9A%8F%E5%86%99%E7%AC%94%E8%AE%B0-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E7%BE%A4/" title="工厂模式群"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">工厂模式群</div></div></a></div><div class="next-post pull-right"><a href="/2024/08/30/C++20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-4-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="C++20设计模式-4-原型模式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++20设计模式-4-原型模式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/%E5%A4%B4%E5%83%8F2.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ahao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ahaolabel.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ahaolabel" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiahao20099@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Qt%E7%9A%84%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8A%9F%E8%83%BD%E5%BB%BA%E7%AB%8B%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Qt的元对象系统的功能建立基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#QObject%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">QObject类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QObject%E7%B1%BB%E4%B8%8E%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7%E7%9B%B8%E5%85%B3%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">QObject类与元对象系统特性相关的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">元对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.2.</span> <span class="toc-text">类型信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%BF%BB%E8%AF%91"><span class="toc-number">2.2.3.</span> <span class="toc-text">动态翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%A0%91"><span class="toc-number">2.2.4.</span> <span class="toc-text">对象树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E6%A7%BD"><span class="toc-number">2.2.5.</span> <span class="toc-text">信号槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.2.6.</span> <span class="toc-text">属性系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E5%AF%B9%E8%B1%A1%E7%89%B9%E6%80%A7%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.</span> <span class="toc-text">元对象特性的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E5%AF%B9%E8%B1%A1-meta-object"><span class="toc-number">2.3.1.</span> <span class="toc-text">元对象(meta object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">类型信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%BF%BB%E8%AF%91-1"><span class="toc-number">2.3.3.</span> <span class="toc-text">动态翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%A0%91-object-tree"><span class="toc-number">2.3.4.</span> <span class="toc-text">对象树(object tree)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD"><span class="toc-number">2.4.</span> <span class="toc-text">信号与槽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E7%B3%BB%E7%BB%9F-1"><span class="toc-number">2.5.</span> <span class="toc-text">属性系统</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#QMetaObject%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">QMetaObject类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#QMetaObject%E7%B1%BB%E7%9A%84%E4%B8%BB%E8%A6%81%E6%8E%A5%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">QMetaObject类的主要接口函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.1.</span> <span class="toc-text">类的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E4%BF%A1%E6%81%AF%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.2.</span> <span class="toc-text">类信息元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.3.</span> <span class="toc-text">构造函数元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.4.</span> <span class="toc-text">方法元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.5.</span> <span class="toc-text">枚举类型元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.6.</span> <span class="toc-text">属性元数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD-1"><span class="toc-number">3.1.7.</span> <span class="toc-text">信号与槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.8.</span> <span class="toc-text">静态函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E5%AF%B9%E8%B1%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%80%A7%E8%A1%A5%E5%85%85%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">元对象系统的一些特性补充扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-number">4.1.</span> <span class="toc-text">运行时类型信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E7%B3%BB%E7%BB%9F-2"><span class="toc-number">4.2.</span> <span class="toc-text">属性系统</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/05/C++20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-9-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="C++20设计模式-9-装饰器模式">C++20设计模式-9-装饰器模式</a><time datetime="2024-10-05T01:30:00.000Z" title="发表于 2024-10-05 09:30:00">2024-10-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/23/C++20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-8-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" title="C++20设计模式-8-组合模式">C++20设计模式-8-组合模式</a><time datetime="2024-09-23T09:24:00.000Z" title="发表于 2024-09-23 17:24:00">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/15/C++20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-7-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" title="C++20设计模式-7-桥接模式">C++20设计模式-7-桥接模式</a><time datetime="2024-09-15T09:35:00.000Z" title="发表于 2024-09-15 17:35:00">2024-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/06/C++20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-6-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="C++20设计模式-6-适配器模式">C++20设计模式-6-适配器模式</a><time datetime="2024-09-06T02:27:00.000Z" title="发表于 2024-09-06 10:27:00">2024-09-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/03/C++20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-5-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" title="C++20设计模式-5-单例模式">C++20设计模式-5-单例模式</a><time datetime="2024-09-03T10:25:30.000Z" title="发表于 2024-09-03 18:25:30">2024-09-03</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/%E8%83%8C%E6%99%AF2.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By ahao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

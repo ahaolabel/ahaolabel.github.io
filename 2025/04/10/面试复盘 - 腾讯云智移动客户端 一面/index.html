@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>面试复盘 - 腾讯云智移动客户端 一面 | ahao的休憩小屋</title><meta name="author" content="ahao"><meta name="copyright" content="ahao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Q 那我问你一个问题qt,然后渲染图片那个组件叫什么 A 关于图片，我重新画了一下吧，当然对，重新画了一下。 分析1:QPainter：QPainter是一个基于扫描线的图形渲染引擎，可以用于绘制各种图形和文本，包括图片。它与特定设备的      QPainterDevice对象交互，将二维图形呈现到窗口上。QPainter可以与QWidget或其他显示设备（如QImage或QPrinter）配合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试复盘 - 腾讯云智移动客户端 一面">
+<meta property="og:url" content="http://ahaolabel.github.io/2025/04/10/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98%20-%20%E8%85%BE%E8%AE%AF%E4%BA%91%E6%99%BA%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%20%E4%B8%80%E9%9D%A2/index.html">
+<meta property="og:site_name" content="ahao的休憩小屋">
+<meta property="og:description" content="Q 那我问你一个问题qt,然后渲染图片那个组件叫什么 A 关于图片，我重新画了一下吧，当然对，重新画了一下。 分析1:QPainter：QPainter是一个基于扫描线的图形渲染引擎，可以用于绘制各种图形和文本，包括图片。它与特定设备的      QPainterDevice对象交互，将二维图形呈现到窗口上。QPainter可以与QWidget或其他显示设备（如QImage或QPrinter）配合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ahaolabel.github.io/img/%E5%A4%B4%E5%83%8F2.png">
+<meta property="article:published_time" content="2025-04-10T07:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-11T02:28:51.361Z">
+<meta property="article:author" content="ahao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ahaolabel.github.io/img/%E5%A4%B4%E5%83%8F2.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://ahaolabel.github.io/2025/04/10/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98%20-%20%E8%85%BE%E8%AE%AF%E4%BA%91%E6%99%BA%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%20%E4%B8%80%E9%9D%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ahao","link":"链接: ","source":"来源: ahao的休憩小屋","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '面试复盘 - 腾讯云智移动客户端 一面',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-04-11 10:28:51'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/%E5%A4%B4%E5%83%8F2.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E8%83%8C%E6%99%AF2.png')"><nav id="nav"><span id="blog-info"><a href="/" title="ahao的休憩小屋"><span class="site-name">ahao的休憩小屋</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">面试复盘 - 腾讯云智移动客户端 一面</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-10T07:00:00.000Z" title="发表于 2025-04-10 15:00:00">2025-04-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-11T02:28:51.361Z" title="更新于 2025-04-11 10:28:51">2025-04-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/">面试复盘</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="面试复盘 - 腾讯云智移动客户端 一面"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Q 那我问你一个问题qt,然后渲染图片那个组件叫什么</p>
+<p>A 关于图片，我重新画了一下吧，当然对，重新画了一下。</p>
+<h1 id="分析1"><a href="#分析1" class="headerlink" title="分析1:"></a>分析1:</h1><pre><code>QPainter：QPainter是一个基于扫描线的图形渲染引擎，可以用于绘制各种图形和文本，包括图片。它与特定设备的      QPainterDevice对象交互，将二维图形呈现到窗口上。QPainter可以与QWidget或其他显示设备（如QImage或QPrinter）配合使用，因此你可以在屏幕上轻松地呈现复杂的几何图形和文本。
+</code></pre>
+<p>Q 重新画了一下，是他肯定要从客户端或者说你的服务端里面读一张牌信息，还是说你整个牌都是自己画的。</p>
+<p>A 整个牌是存储在本地的牌的信息，然后把那个排的信息存储到本地之后，从本地第就是拿本地的图片去做。</p>
+<p>Q 本地的图片去做，那你本地的图片怎么去都提升了？是你本地存了各种牌64章。</p>
+<p>A 对本地存了64张牌。</p>
+<p>Q 本地测试做对应的是吧？</p>
+<p>A 对。</p>
+<p>Q 有个小问题，那你本地的图片放在抽屉上，展示qt有组件可以，控件可以展示的。</p>
+<p>A 这个不记，这个不记得。</p>
+<h1 id="分析2"><a href="#分析2" class="headerlink" title="分析2:"></a>分析2:</h1><pre><code>QPainter,同上一个分析
+</code></pre>
+<p>Q QT常见的生命周期函数。</p>
+<p>A 生命周期函数。 没有印象。</p>
+<h1 id="分析3"><a href="#分析3" class="headerlink" title="分析3:"></a>分析3:</h1><table>
+<thead>
+<tr>
+<th>函数&#x2F;机制</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造函数</td>
+<td>创建对象，初始化属性和资源。</td>
+</tr>
+<tr>
+<td>析构函数</td>
+<td>销毁对象，释放资源。</td>
+</tr>
+<tr>
+<td>deleteLater()</td>
+<td>延迟销毁对象，避免在事件处理过程中直接删除导致的崩溃。</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>对象销毁时发出的信号，用于执行清理操作。</td>
+</tr>
+<tr>
+<td>show()和hide()</td>
+<td>显示或隐藏窗口或控件。</td>
+</tr>
+<tr>
+<td>父子关系</td>
+<td>父对象自动管理子对象的生命周期，确保子对象在父对象销毁时也被销毁。</td>
+</tr>
+<tr>
+<td>事件循环</td>
+<td>启动和管理应用程序的事件处理。</td>
+</tr>
+</tbody></table>
+<p>Q 这个项目是我看一下这个项目上周说的，这个项目是什么时候做的</p>
+<p>A 比较早是去年到今年一月，是去年三月到今年一月。斗地主要是去年做的斗地主这块。</p>
+<p>Q 好的，实习这块那我们再聊一下，在上面这边，然后一个是九月2024年9月月到十月份的一个森和森致远智能信息科技有限公司。对吧？对这个的话，涉及这个主要是做了一个什么事情来着？</p>
+<p>A mito s系统实验相关的。</p>
+<p>Q 为什么一个公司会让你去做操作？系统实验是公司学校安排的吗？</p>
+<p>A 这个是在网上找远程实习，主要是做教育课件。现当类似于教育课件这种东西。</p>
+<p>Q 那这个我就不太那我们聊一下讯兔，感觉这个时间是一些比较长，应该大概有次四个月是吧？</p>
+<p>A 对。</p>
+<p>Q 现在还在实习是吧？</p>
+<p>A 现在不在，现在在学校。</p>
+<p>Q 好的，讯兔这个主要是做了一个问答联网的，对这个能详细介绍一下吗？</p>
+<p>A 这个背景是公司原来派问答是主要做金融垂直类的问答，从公司数据库里，夏粮库里，而拿那个信息，然后去给到大模型，大模型人回答，这样的话。存在几个问题，首先是那个实时信息不多，因为是公司向量库里不能及时的更新信息，对，然后是那个海外的信息没有太多，因为公司的向量库主要是在国内，主要是公司，主要是国内资料多。还有一个问题是有些，主要是做金融类的嘛，但是有些时候有些问题是常识性的，有些常识性的问题比较通俗的，答的不好，这是三个问题，所以就想到使用联网搜索这个方案来增加一下信息源。</p>
+<p>Q 那我好奇，你们用的联网搜索这个事是有类似于coze之类的，这种已经封装好的一片，还是说你们自己在自己的服务器上部署了一套大模型。</p>
+<p>A 使用在网上的api, 其他公司的api.</p>
+<p>Q 是哪家公司的api呢？</p>
+<p>A 好。是是那个一开始选的时候最后调研的时候，调研完之后使用的是智谱联网搜索。</p>
+<p>Q 这个是吧？对，那你的。Rank的数据库是上传到他们的平台。</p>
+<p>A 我这边联网搜索的话，是直接从直接问调用质谱的api 获得信息，对他信息进行处理，然后跟其他从公司现在会让给你拿的信息融合到一块，然后送给大模型。</p>
+<p>Q 是一个后端的业务，对吧？</p>
+<p>A 对。</p>
+<p>Q 那它的准确性最后怎么样？</p>
+<p>A 其实第一版的话，是大概有30%的30%的问题能够出现联网搜索的引用新闻之后，然后后来又改了一版，之后是70%，然后再后来最后做了一下调整，就是把原来取的是三个槽嘛。然后后来又调成四个槽，之后最后结果是最终的结果是90%。</p>
+<p>Q 你说的这个叫修复了循环堵塞，循环的修复了视线循环堵塞的问题了，大模型时间获取的bug.这个能能详细介绍一下吗？</p>
+<p>A 具体是什么问第一版的时候是我，那个我们最后是其他流程，结束之后我我还要联网搜索，还要等联网搜索，两秒钟最多，这个时候我外要循环里y直接调用，while循环反复的去查询。联网搜索是否结束了，那这个时候反复调用外要循环就卡住了，中间还有一个time加time判断是时间，是不是还有结束，反复调用，while循环里调用time点time time,然后就卡住了，最后在里面写的加了个sleep,短暂的睡一下，每次结束。每次查询一下。</p>
+<p>Q 那这个业务在是公司内部状态。</p>
+<p>A 联网搜索是已经上线了。</p>
+<p>Q 就是公网外部用户也可以体验</p>
+<p>A 对。</p>
+<p>Q 我们聊一个大学的一些基础知识，然后首先问一下C。</p>
+<p>A 因为三做手术主要是双方都确认一下，否则的话你一错两次握手的话，你只有一方确认了，那可能是历史消息的影响，必须双方都要确认一下，这个并不是历史消息。</p>
+<h1 id="分析4"><a href="#分析4" class="headerlink" title="分析4:"></a>分析4:</h1><pre><code>TCP 的三次握手之所以被称为“三次握手”，是因为它通过三次报文交换来建立一个可靠的连接。这种机制是 TCP 协议的核心之一，确保了通信双方在正式开始数据传输之前能够同步状态、确认对方的存在，并为后续的通信做好准备。
+1. 确保双方都准备好通信：
+   三次握手确保了通信双方都清楚对方的存在，并且双方都同意建立连接。
+   如果只有两次握手，可能会出现以下问题：
+    客户端发送了`SYN`，但服务器可能没有收到。
+    服务器发送了`SYN-ACK`，但客户端可能没有收到。
+    如果没有第三次握手，服务器无法确认客户端是否已经准备好通信。
+
+2. 同步序列号：
+    TCP 是基于字节流的协议，需要通过序列号来确保数据的顺序和完整性。
+    三次握手允许双方交换初始序列号（`ISN`），从而为后续的数据传输提供可靠的编号机制。
+
+3. 避免历史连接的干扰：
+    如果网络中存在延迟或旧的报文段，三次握手可以避免因为旧的`SYN`报文重新到达服务器而误建立连接。
+    例如，如果客户端发送了一个`SYN`报文，但网络延迟导致这个报文在很久之后才到达服务器，服务器可能会误以为这是一个新的连接请求。通过三次握手，服务器可以确认客户端是否真的想要建立连接。
+</code></pre>
+<p>Q 大概答的是对的。应该理解了udp跟tcp的区别是什么？</p>
+<p>A Tcp的话，它是面向自节的主要字，节流的，他那个更可靠。Udp的话，它是发报文，什么utc p的话，有一些机制，它传送的话，它比如说有些纠错，这些机制它也是顺序接顺序，有序号顺序接的。Udp的话，他没有这个，他是到他是所有报文到了之后，然后再去做那个检查重组。</p>
+<p>Q 还有其他的。</p>
+<p>A 其他的暂时记不清了。</p>
+<h1 id="分析5"><a href="#分析5" class="headerlink" title="分析5:"></a>分析5:</h1><pre><code>|     特性     |              TCP            |           UDP             | 
+|      ---     |              ---            |           ---             | 
+|   连接方式   |      面向连接（三次握手）     |           无连接           | 
+|    可靠性    |        可靠（确认、重传）     |    不可靠（无确认、无重传） | 
+|   传输效率   |        较低（有开销）         |          较高（无开销）    | 
+| 数据传输方式 |          基于字节流           |          基于数据报        | 
+|   应用场景   | 高可靠性场景（如 HTTP、SMTP） | 实时性场景（如视频流、游戏） | 
+|   拥塞控制   |         有拥塞控制           |           无拥塞控制        | 
+|   首部开销   |        较大（20-60 字节）     |         较小（8 字节）     | 
+</code></pre>
+<p>Q 那udp可以做到tcp，就是可靠的协议吗？</p>
+<p>A 其实也可以。现在比如说quic出来之后，其实现在http用的也是http 3.0用的，也是udp.</p>
+<p>Q 那你有了解过假设，现在如果让你基于udp协议去做一个可靠的网络协议传输，你会打算怎么做？</p>
+<p>A 可能也是顺序发放，然后以次接收了，中间可能会。中间可能会加入一些简检错重传，这种东西。</p>
+<h1 id="分析6："><a href="#分析6：" class="headerlink" title="分析6："></a>分析6：</h1><pre><code>序列号：确保数据顺序。
+ACK 和 NACK：确认和否定确认机制。
+超时重传：处理丢包。
+累积确认：减少 ACK 数量。
+拥塞控制：动态调整发送速率。
+发送窗口：提高吞吐量。
+连接管理：模拟 TCP 的连接机制。
+错误检测：确保数据完整性。
+乱序处理：重组乱序数据。
+</code></pre>
+<p>Q 你的检测跟重传的这块可以详细谈一谈，你打算怎么检测？怎么。</p>
+<p>A 检测简单点，可以使用奇偶校验。然后从接口校验吗？有一个照相盒吗？</p>
+<h1 id="分析7"><a href="#分析7" class="headerlink" title="分析7:"></a>分析7:</h1><pre><code>在基于UDP协议实现可靠传输时，检测和重传机制是确保数据可靠传输的关键。以下是对检测和重传机制的详细探讨：
+
+检测机制
+1. 校验和检测：
+    UDP本身提供校验和字段，用于检测数据在传输过程中是否发生错误。发送方计算校验和并将其放入UDP数据包中，接收方收到数据包后重新计算校验和并与接收到的校验和进行比较。如果两者不匹配，则认为数据包损坏。
+    对于关键业务，可以使用更高级的校验机制，如CRC（循环冗余校验）或MD5哈希校验，以提高错误检测的准确性。
+
+2. 序列号检测：
+    每个UDP数据包都包含一个序列号，用于标识数据包的发送顺序。接收方可以根据序列号检测数据包的丢失或乱序。
+
+3. 时间戳检测：
+    在数据包中添加时间戳，用于检测数据包的时序和网络延迟。如果数据包的时间戳与当前时间相差过大，可能表明数据包已经过期或丢失。
+
+重传机制
+1. 超时重传：
+    发送方为每个未确认的数据包设置一个定时器。如果定时器超时且未收到确认应答（ACK），则认为数据包丢失，发送方重传该数据包。
+    超时时间（RTO）可以根据网络状况动态调整，通常基于RTT（Round-Trip Time）的平均值和方差来计算。
+
+2. 否定确认重传（NACK）：
+    接收方在发现数据包丢失或损坏时，主动向发送方发送否定确认（NACK）消息，请求重传特定的数据包。
+
+3. 累积确认与选择性重传：
+    接收方发送累积确认（ACK），确认已收到的最后一个连续数据包的序列号。发送方根据累积确认确定哪些数据包需要重传。
+    选择性重传（Selective Repeat）机制允许发送方只重传丢失的数据包，而不是重传从丢失数据包开始之后的所有数据包，从而提高传输效率。
+</code></pre>
+<p>Q 这个校验和怎么设计的？</p>
+<p>A 合适的话，可以，他每个可以使用，那个就是使用一串数字，然后去除以他每个阿斯卡码值，然后加起来这个可以吗？</p>
+<h1 id="分析8"><a href="#分析8" class="headerlink" title="分析8:"></a>分析8:</h1><pre><code>在基于UDP协议设计校验和时，可以参考以下方法：
+
+1. 校验和的构造
+    伪首部的构造：校验和的计算需要包括一个伪首部，伪首部包含以下内容：
+        源IP地址
+        目的IP地址
+        协议类型（UDP为17）
+        UDP数据的长度。
+
+    UDP数据的分段：将UDP数据报文按16位（2字节）为单位进行分段。如果数据长度不是偶数，可以在末尾补一个字节的填充（值为0）。
+
+2. 校验和的计算
+    求和：将伪首部、UDP头部和数据部分的所有16位字相加。
+    回卷处理：如果求和过程中出现溢出（超过16位），将溢出的部分加到结果的低16位上。
+    取反：将最终的和按位取反，得到校验和。
+
+3. 校验和的验证
+    接收端验证：接收方将接收到的UDP数据包（包括校验和字段）按同样的方法进行计算。如果结果为全1（即0xFFFF），则认为数据包没有错误；否则，认为数据包可能已损坏。
+
+4. 应用场景
+    错误检测：校验和用于检测UDP数据包在传输过程中是否发生错误，如位翻转或数据损坏。
+    数据完整性：确保接收方接收到的数据与发送方发送的数据一致。
+</code></pre>
+<p>Q 那你为什么不想直接用序号呢？标号1234给它标了没？一个包一个包的，对方按顺序校验，丢了一个，中间丢了一个，丢了，让他重传包，丢的包发过来，谢吗？<br>重新再发一次，前后面的标全部丢掉。</p>
+<p>A 类似滑动窗口是吧。</p>
+<p>Q 再问一下tcp跟http的区别是。</p>
+<p>A tcp http不是一层吧。</p>
+<p>Q 是不是一层它俩的区别是什么？</p>
+<p>A Http是应用层tcp是在网络层。</p>
+<h1 id="分析9"><a href="#分析9" class="headerlink" title="分析9"></a>分析9</h1><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>TCP</th>
+<th>HTTP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>协议层次</td>
+<td>传输层</td>
+<td>应用层</td>
+</tr>
+<tr>
+<td>功能</td>
+<td>可靠的、面向连接的传输</td>
+<td>请求-响应模式的超文本传输</td>
+</tr>
+<tr>
+<td>通信方式</td>
+<td>面向连接、双向通信</td>
+<td>无连接、请求-响应模式</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>可靠（确认、重传）</td>
+<td>依赖 TCP 的可靠性</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>较低（有开销）</td>
+<td>较高（基于 TCP）</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>高可靠性场景（如文件传输、邮件传输）</td>
+<td>Web 服务（如网页浏览、API 请求）</td>
+</tr>
+<tr>
+<td>数据格式</td>
+<td>基于字节流</td>
+<td>基于文本协议</td>
+</tr>
+<tr>
+<td>连接管理</td>
+<td>三次握手、四次挥手</td>
+<td>每次请求独立（HTTP&#x2F;1.0）或持久连接（HTTP&#x2F;1.1）</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>无（可结合 TLS&#x2F;SSL）</td>
+<td>无（可结合 HTTPS）</td>
+</tr>
+</tbody></table>
+<p>Q http跟Tcp,或者换言之来讲，那你我问一个，就是你前面的，你前面用的那些就服务的话。更多是用tcp的协议还是用hdp的行为？就是，比如说就在讯兔实习部了。</p>
+<p>A 拍拍搜索用的更多的话，是这是http吧？</p>
+<p>Q Http是吧？</p>
+<p>A 对。</p>
+<p>Q http的错误码是吧？200代表什么意思？状态吗？</p>
+<p>A 信息响应吗？</p>
+<p>Q 什么信息响应？404呢？</p>
+<p>A 404是在服务端没有找到资源。</p>
+<h1 id="分析10"><a href="#分析10" class="headerlink" title="分析10"></a>分析10</h1><p>2XX 成功<br>200 OK: 请求成功，服务器返回所请求的资源或数据<br>201 Created: 请求并成功创建了新的资源，常用于POST请求<br>204 No Content: 请求成功但服务器不返回任何内容</p>
+<p>Q ai的模型24种设计模式。好，那我们再问一下那个计算机基础，就是假设有一个程序，有一个c加加的程序，对吧？然后就是里面有一个new的一个数据，这个数据每次是申请16次行，那个内存你写了个for循环申请1000次。对吧？<br>那这个时候这条进程里虚拟内存的增加是多少？那虚拟内存会增加吗？只申请不申名。<br>不会增产，物理预算不是虚拟内存会增加吗？</p>
+<p>A 不会吧，我觉得。</p>
+<p>Q 会是吧。</p>
+<p>A 为什么会。</p>
+<p>Q 不是我？是我问你说虚拟内存，如果这种循环申请，但是不使用的情况底下。虚拟内存会不会增加？虚拟内存有个for循环在那里？循环。循环申请，然后有一个。申请一个1616 kb的内存的大小。</p>
+<p>A 不会吧，我觉得。</p>
+<p>Q 虚拟内存不会增加是吧？对物理预测会。</p>
+<p>A 物理内存的话，物理内存可能会。</p>
+<p>Q 问题，没有什么。</p>
+<p>A 适宜的时候可能会从页表里不停的去置换物理内存的话，需要真的存东西。</p>
+<p>Q 不使用它会产生这种置换吗？或真实的物理。</p>
+<p>A 没有了解过。</p>
+<h1 id="分析11"><a href="#分析11" class="headerlink" title="分析11"></a>分析11</h1><pre><code>虚拟内存是否会增加？
+    是的，虚拟内存会增加。每次调用 `new` 操作符申请内存时，程序会向操作系统请求一块虚拟内存。即使你没有显式地释放这些内存（即没有调用 `delete`），这些内存仍然会被操作系统认为是程序正在使用的虚拟内存，因此虚拟内存的占用会增加。
+
+虚拟内存的增加量是多少？
+    理论上，每次调用 `new` 申请 16 个字节的内存，1000 次循环后，虚拟内存的增加量应该是：
+    16000字节 = 16KB
+
+    但实际上，虚拟内存的增加量可能会稍微大于这个值，原因如下：
+
+    1. 内存对齐和管理开销：操作系统和内存分配器（如 `malloc` 或 C++ 的 `new`）通常会对内存分配进行对齐（例如 8 字节或 16 字节对齐），并可能添加一些管理元数据（如块大小、分配状态等）。因此，实际分配的内存可能会比请求的 16 字节稍大。
+
+    2. 分配器的优化：现代的内存分配器（如 glibc 的 `malloc` 或其他实现）通常会将小块内存合并管理，避免频繁向操作系统请求内存。因此，分配器可能会一次性从操作系统获取更大的内存块（例如 4KB 或更多），然后从中分割出小块内存供程序使用。这种情况下，虚拟内存的增加可能并不是完全线性的。
+
+    3. 操作系统的内存管理：操作系统可能会将未使用的虚拟内存标记为“保留”（reserved），但不会立即分配物理内存。只有当程序实际访问这些内存时，操作系统才会将虚拟内存映射到物理内存。
+
+    总结
+    虚拟内存会增加：每次调用 `new` 都会增加虚拟内存的占用。
+    具体增加量：理论上是 16KB，但实际值可能略大于这个值，具体取决于内存分配器和操作系统的实现细节。
+    物理内存的消耗：未使用的虚拟内存可能不会立即占用物理内存，但虚拟内存的占用仍然会计入进程的虚拟内存统计中。
+
+    如果你需要更精确地测量虚拟内存的变化，可以使用工具（如 Linux 的 `ps` 命令或 `top` 命令）来观察进程的虚拟内存使用情况。
+</code></pre>
+<p>Q 然后再问一下链表跟栈，然后或者数组栈哪个查询比较快。</p>
+<p>A 数组是吧？</p>
+<p>Q 哪个插入比较快？</p>
+<p>A 栈。</p>
+<p>Q 一般我们会发现。发现发生死锁都都会有哪些？就是思索的原因是什么？</p>
+<p>A 死死的原因是对资源的争夺，卡住了，就是你需要的资源对面已经占用了，对面需要资源，你已经占用了，然后就卡。</p>
+<p>Q 卡住了。就你有遇到过出手吗？你怎么去解决它？</p>
+<p>A 编程过程现在现在的话，编程的话，遇到搜索比较少，一般都是使用raii,他那个新版本的那种锁。</p>
+<p>Q<br>你可以分享屏幕，写一个思索的，用c++写一个思索的话。协场。<br>你电脑上有ide 或者如果没有ide的话，可以用文本写也行，然后简单就是就是写伪代码也可以。</p>
+<p>A 好用记事本写行吗？</p>
+<p>Q 对，可以的，没问题。</p>
+<p>A 类似于这种。</p>
+<p>Q 不应该先写两个线程的。</p>
+<p>A 随便这样写吧。那样的话，感觉。</p>
+<p>Q 你的c一跟c二里面各自起了一个县程是吧？对，那你的r一跟r二在哪？为什么c一跟c二可以存的访问r一跟r二。</p>
+<p>A 在可能cc一跟c二的话，是在一个项目里，然后资源是存了一个，存了一个点h里。可能打不开了。</p>
+<p>Q<br>等一下。<br>我再问一下，反正你现在在整个专业里面，你们专业大概有多少学生？</p>
+<p>A<br>我们专业学生比较多二百。</p>
+<p>Q<br>那你在整个专业里面。</p>
+<p>A<br>排名大概到多前30%，我绩点不高。</p>
+<p>Q 那没靠你分数比较高一点。</p>
+<p>A 专业课专业课的话。计算机相关的话都八九十。</p>
+<p>Q大点实升，我们现在就。<br>这是一个很简单，这个大模型，这里的话，你除了用一些跑mat的话，你还有了解，还有了解其他的信息吗？</p>
+<p>A 其他的了解不多。</p>
+<p>Q 所以你第一份工作里面就是不是迅速的那个实习。主要还是集中在应用。</p>
+<p>A 对，主要是音乐，主要是使用。</p>
+<p>Q c++这里的话，智能指针，然后有了。</p>
+<p>A 有了解。</p>
+<p>Q 对，那你呢？谈一下智能指针的share_ptr 实现的原理吗？</p>
+<p>A Share_ptr的原理是以加入加入一个引用计数，每多指向一个计数，加一计数归零的时候再释放。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://ahaolabel.github.io">ahao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://ahaolabel.github.io/2025/04/10/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98%20-%20%E8%85%BE%E8%AE%AF%E4%BA%91%E6%99%BA%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%20%E4%B8%80%E9%9D%A2/">http://ahaolabel.github.io/2025/04/10/面试复盘 - 腾讯云智移动客户端 一面/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ahaolabel.github.io" target="_blank">ahao的休憩小屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/%E5%A4%B4%E5%83%8F2.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/04/11/%E9%9D%A2%E7%BB%8F%20-%20CAP%E5%AE%9A%E7%90%86/" title="面经 - CAP定理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">面经 - CAP定理</div></div></a></div><div class="next-post pull-right"><a href="/2025/04/10/%E9%9D%A2%E7%BB%8F%20-%20%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" title="面经 - 一致性哈希"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">面经 - 一致性哈希</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/%E5%A4%B4%E5%83%8F2.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ahao</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ahaolabel.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ahaolabel" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:jiahao20099@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%901"><span class="toc-number">1.</span> <span class="toc-text">分析1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%902"><span class="toc-number">2.</span> <span class="toc-text">分析2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%903"><span class="toc-number">3.</span> <span class="toc-text">分析3:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%904"><span class="toc-number">4.</span> <span class="toc-text">分析4:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%905"><span class="toc-number">5.</span> <span class="toc-text">分析5:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%906%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">分析6：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%907"><span class="toc-number">7.</span> <span class="toc-text">分析7:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%908"><span class="toc-number">8.</span> <span class="toc-text">分析8:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%909"><span class="toc-number">9.</span> <span class="toc-text">分析9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%9010"><span class="toc-number">10.</span> <span class="toc-text">分析10</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%9011"><span class="toc-number">11.</span> <span class="toc-text">分析11</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E5%86%85%E6%A0%B8%E6%98%AF%E5%A6%82%E4%BD%95%E6%8E%A5%E6%94%B6%E7%BD%91%E7%BB%9C%E5%8C%85%E7%9A%84/" title="深入理解Linux网络笔记-第一章内核是如何接收网络包的">深入理解Linux网络笔记-第一章内核是如何接收网络包的</a><time datetime="2025-04-15T11:15:00.000Z" title="发表于 2025-04-15 19:15:00">2025-04-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/15/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Linux%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%BB%AA%E8%AE%BA/" title="深入理解Linux网络笔记-第一章绪论">深入理解Linux网络笔记-第一章绪论</a><time datetime="2025-04-15T11:06:11.000Z" title="发表于 2025-04-15 19:06:11">2025-04-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/12/%E9%9D%A2%E7%BB%8F%20-%20%E4%B8%AD%E6%96%AD%E7%9B%B8%E5%85%B3/" title="面经 - 中断相关">面经 - 中断相关</a><time datetime="2025-04-12T15:33:00.000Z" title="发表于 2025-04-12 23:33:00">2025-04-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/11/%E9%9D%A2%E7%BB%8F%20-%20CAP%E5%AE%9A%E7%90%86/" title="面经 - CAP定理">面经 - CAP定理</a><time datetime="2025-04-11T02:33:00.000Z" title="发表于 2025-04-11 10:33:00">2025-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/10/%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98%20-%20%E8%85%BE%E8%AE%AF%E4%BA%91%E6%99%BA%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%20%E4%B8%80%E9%9D%A2/" title="面试复盘 - 腾讯云智移动客户端 一面">面试复盘 - 腾讯云智移动客户端 一面</a><time datetime="2025-04-10T07:00:00.000Z" title="发表于 2025-04-10 15:00:00">2025-04-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/%E8%83%8C%E6%99%AF2.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By ahao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
